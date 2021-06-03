@@ -1,0 +1,67 @@
+.app {
+  background-color: #2f3640;
+  color: white;
+  height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  transition: ease-in-out 1000ms;
+}
+
+.appScrolled {
+  background-color: #eef0f1;
+  color: #2f3640;
+  height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  transition: ease-in-out 1000ms;
+}
+
+.app__feed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.app__recent {
+  text-align: start;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(196, 195, 195, 0.289);
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.app__recent span {
+  padding-bottom: 20px;
+  border-bottom: 2px solid #2f3640;
+}
+
+.app__recent span {
+  border-bottom: 2px solid white;
+}
+
+.app__logo {
+  color: rgb(255, 255, 255) !important;
+  background-image: url(../components/assets/images/space.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 70px;
+  height: 430px;
+  display: grid;
+  place-items: center;
+}
+
+.fadeBottom {
+  margin-top: -40px;
+  height: 40px;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgba(37, 37, 37, 0.823)
+  );
+}
