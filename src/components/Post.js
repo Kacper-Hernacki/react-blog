@@ -12,6 +12,7 @@ import Author from './other/Author.js';
 import Footer from './other/Footer.js';
 import Comments from './other/Comments.js';
 import CommentsForm from './other/CommentsForm.js';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -79,24 +80,18 @@ export default function Post() {
     };
   }
 
-  // const serializers = {
-  //   types: {
-  //     code: (props) => (
-  //       <SyntaxHighlighter className="codeBlock" language={props.node.language} styles={}>
-  //         {props.node.code}
-  //       </SyntaxHighlighter>
-  //     ),
-  //     image: (props) => (
-  //       <figure>
-  //         <img
-  //           className={styles.blockImage}
-  //           src={urlFor(props.node.asset).width(500).url()}
-  //           alt=""
-  //         />
-  //       </figure>
-  //     ),
-  //   },
-  // };
+  const serializers = {
+    types: {
+      code: (props) => (
+        <SyntaxHighlighter
+          className="codeBlock"
+          language={props.node.language}
+          styles={docco}>
+          {props.node.code}
+        </SyntaxHighlighter>
+      ),
+    },
+  };
 
   return (
     <div className="singlePost">
@@ -134,19 +129,19 @@ export default function Post() {
             projectId="78wde2tk"
             dataset="production"
             blocks={singlePost.body}
-            // serializers={serializers}
+            serializers={serializers}
           />
         </div>
-        <Share shareUrl={`http://www.thedevsuniverse.com/${slug}`} />
+        <Share shareUrl={`https://www.thedevsuniverse.com/${slug}`} />
         <Author
           authorImageUrl={urlFor(singlePost.authorImage).url()}
           author={singlePost.author}
           authorBio={singlePost.authorBio}
         />
-        <Comments comments={singlePost?.comments} />
-        <CommentsForm _id={singlePost._id} />
-        <Footer />
-      </div>
+        {/* <Comments comments={singlePost?.comments} />
+        <CommentsForm _id={singlePost._id} /> */}
+      </div>{' '}
+      <Footer />
     </div>
   );
 }

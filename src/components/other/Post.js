@@ -22,7 +22,6 @@ function Post({
   authorAvatar,
   content,
 }) {
-  console.log(authorAvatar);
   return (
     <div className="post__container">
       <Link style={{ textDecoration: 'none' }} to={'/post/' + slug} key={slug}>

@@ -7,8 +7,13 @@ function Newsletter() {
   const [state, setState] = useState('IDLE');
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const subscribe = async () => {
-    return true;
+  const subscribe = (e) => {
+    if (email) {
+      fetch(`/api/memberAdd?email=${email}`)
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
   };
   return (
     <div className="newsletter">

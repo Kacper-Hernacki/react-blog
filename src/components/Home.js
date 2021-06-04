@@ -14,7 +14,7 @@ export default function Home() {
   const [content, setContent] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(4);
+  const [postsPerPage, setPostsPerPage] = useState(3);
 
   useEffect(() => {
     sanityClient
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="app__logo">
           <img className="logoImage" alt="" src={LogoWhite} />
         </div>
-        <div className="fadeBottom" />
+        <div className={`${content ? 'fadeBottom__scrolled' : 'fadeBottom'}`} />
         <h3 className="app__recent">
           <span>Recent Posts:</span>
         </h3>
@@ -102,7 +102,7 @@ export default function Home() {
           paginate={paginate}
           currentPage={currentPage}
         />
-        <Newsletter />
+        {/* <Newsletter /> */}
         <Footer />
 
         <CookieConsent

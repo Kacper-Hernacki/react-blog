@@ -46,7 +46,7 @@
 
 .app__logo {
   color: rgb(255, 255, 255) !important;
-  background-image: url(../components/assets/images/space.svg);
+  background-image: url(../components/assets/images/space.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -64,6 +64,14 @@
     transparent,
     rgba(37, 37, 37, 0.823)
   );
+  transition: ease-in-out 1000ms;
+}
+
+.fadeBottom__scrolled {
+  margin-top: -40px;
+  height: 40px;
+  background-image: linear-gradient(180deg, transparent, #eef0f1);
+  transition: ease-in-out 1000ms;
 }
 
 @media only screen and (max-width: 600px) {
