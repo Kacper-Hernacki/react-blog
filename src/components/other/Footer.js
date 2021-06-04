@@ -25,7 +25,7 @@ function Footer() {
             color: '#3498db',
             cursor: 'pointer',
           }}>
-          thedevsuniverse@gmail.com
+          hernackikacper@gmail.com
         </span>{' '}
       </p>
       <p>Star vector created by vectorpouch - www.freepik.com</p>

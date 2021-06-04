@@ -20,22 +20,48 @@ function Post({
   authorName,
   counter,
   authorAvatar,
+  content,
 }) {
+  console.log(authorAvatar);
   return (
-    <div className="post">
-      {' '}
-      <Link to={'/post/' + slug} key={slug}>
-        <div>
-          <img src={urlFor(mainImage).url()} alt="img" />
-          <div>{title}</div>
-          <p>{new Date(publishedAt).toDateString()}</p>
-          <div>{fragment}</div>
-          {categories?.map((category) => (
-            <p key={category}># {category}</p>
-          ))}
-          <p>{authorName}</p>
-          <p>{counter}</p>
-          <Avatar src={urlFor(authorAvatar).url()} />
+    <div className="post__container">
+      <Link style={{ textDecoration: 'none' }} to={'/post/' + slug} key={slug}>
+        <div className={`${content ? 'post' : 'post postScrolled'}`}>
+          {mainImage && (
+            <img
+              className="post__mainImage"
+              src={urlFor(mainImage).url()}
+              alt="img"
+            />
+          )}
+          <h3
+            className={`${
+              content ? 'post__title' : 'post__title post__titleScrolled'
+            }`}>
+            {title}
+          </h3>
+          <p className="post__fragment">{fragment}</p>
+          <div className="post__categories">
+            {categories?.map((category) => (
+              <p className="post__category" key={category}>
+                # {category}
+              </p>
+            ))}
+          </div>
+
+          <div className="post__bioFooter">
+            <div className="post__authorAvatar">
+              <Avatar src={urlFor(authorAvatar).url()} />
+            </div>
+
+            <div className="post__bioFooter__right">
+              <p>{authorName}</p>
+              <div className="post__bioFooter__rightDate">
+                <p>{new Date(publishedAt).toDateString()}</p>
+                <h3>{counter} min read</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </Link>
     </div>

@@ -89,6 +89,7 @@ export default function Home() {
                 authorName={p.authorName}
                 counter={p.counter}
                 authorAvatar={p.authorAvatar}
+                content={content}
               />
             ))
           ) : (

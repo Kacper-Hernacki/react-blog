@@ -1,0 +1,40 @@
+.author {
+  margin: auto;
+  max-width: calc(100vw - 50px);
+  margin-top: 40px;
+  padding: 30px;
+  padding-top: 10px;
+  background-color: rgba(136, 136, 136, 0.076);
+}
+
+.author__container {
+  display: flex;
+  align-items: center;
+}
+
+.author__avatar {
+  width: 100px !important;
+  height: 100px !important;
+  margin-right: 30px;
+}
+
+.author__body p {
+  text-align: justify;
+
+  font-weight: 600;
+  line-height: 1.8;
+  color: rgb(88, 88, 88);
+  font-size: 0.825rem;
+}
+
+.author__body h5 {
+  color: #2f3640;
+  font-size: 0.95rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .author__container {
+    flex-direction: column;
+    padding-top: 30px;
+  }
+}

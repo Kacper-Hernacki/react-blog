@@ -12,12 +12,12 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
   return (
     <div className="pagination">
       {' '}
-      {currentPage != 1 && (
+      {currentPage !== 1 && (
         <div className="pagination__number" onClick={() => paginate(1)}>
           First
         </div>
       )}
-      {currentPage != 1 && (
+      {currentPage !== 1 && (
         <div
           className="pagination__number"
           onClick={() => paginate(currentPage - 1)}>
@@ -36,14 +36,14 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
           {number}
         </div>
       ))}
-      {currentPage != pageNumbers.length && (
+      {currentPage !== pageNumbers.length && (
         <div
           className="pagination__number"
           onClick={() => paginate(currentPage + 1)}>
           <NavigateNextIcon />
         </div>
       )}
-      {currentPage != pageNumbers.length && (
+      {currentPage !== pageNumbers.length && (
         <div className="pagination__number" onClick={() => paginate(2)}>
           Last
         </div>

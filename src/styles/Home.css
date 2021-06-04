@@ -2,6 +2,7 @@
   background-color: #2f3640;
   color: white;
   height: 100%;
+  overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
   transition: ease-in-out 1000ms;
@@ -18,12 +19,11 @@
 
 .app__feed {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   padding-right: 40px;
   padding-left: 40px;
+  justify-content: center;
 }
 
 .app__recent {
@@ -64,4 +64,14 @@
     transparent,
     rgba(37, 37, 37, 0.823)
   );
+}
+
+@media only screen and (max-width: 600px) {
+  .app__logo {
+    height: 230px;
+  }
+}
+
+.logoImage {
+  width: 70%;
 }
