@@ -16,9 +16,9 @@ function Footer() {
         }}>
         If you want to write a post on this blog, please contact me!
       </p>
+      <p> Do you need a support?</p>
       <p>
-        Do you need a support? Do you have an idea how to make this blog grow?
-        Email{' '}
+        Do you have an idea how to make this blog grow? Email{' '}
         <span
           style={{
             fontWeight: 'bold',

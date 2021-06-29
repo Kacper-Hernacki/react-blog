@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Toolbar.css';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import LogoWhite from '../assets/images/WhiteLogo.svg';
-import LogoBlack from '../assets/images/BlackLogo.svg';
+import LogoWhite from '../assets/images/WhiteLogo.png';
+import LogoBlack from '../assets/images/textLogoDark.png';
 
 function Toolbar({ content }) {
   const [width, setWidth] = useState(window.innerWidth);

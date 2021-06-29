@@ -7,10 +7,11 @@ import CookieConsent from 'react-cookie-consent';
 import Pagination from './other/Pagination.js';
 import Newsletter from './other/Newsletter.js';
 import Footer from './other/Footer.js';
-import LogoWhite from './assets/images/WhiteLogo.svg';
+import LogoWhite from './assets/images/LogoBig.png';
+import Helmet from 'react-helmet';
 
 export default function Home() {
-  const [postData, setPostData] = useState(null);
+  const [postData, setPostData] = useState([]);
   const [content, setContent] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +68,17 @@ export default function Home() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Thedevsuniverse</title>
+        <meta name="description" content="Blog about webdevelopment" />
+        <meta
+          name="keywords"
+          content="web, development, api, react, angular, frontend, backend, fullstack"
+        />
+        <meta name="author" content="Kacper Hernacki" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Helmet>
       <Toolbar content={content} />
       <div className={`${content ? 'appScrolled' : 'app'}`}>
         <div className="app__logo">
@@ -77,8 +89,8 @@ export default function Home() {
           <span>Recent Posts:</span>
         </h3>
         <div className="app__feed">
-          {postData?.length ? (
-            postData.map((p) => (
+          {currentPosts?.length ? (
+            currentPosts.map((p) => (
               <Post
                 slug={p.slug.current}
                 mainImage={p.mainImage}
@@ -102,7 +114,7 @@ export default function Home() {
           paginate={paginate}
           currentPage={currentPage}
         />
-        {/* <Newsletter /> */}
+        <Newsletter />
         <Footer />
 
         <CookieConsent

@@ -13,6 +13,8 @@ import Footer from './other/Footer.js';
 import Comments from './other/Comments.js';
 import CommentsForm from './other/CommentsForm.js';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import Helmet from 'react-helmet';
+import db from '../firebase';
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -22,6 +24,7 @@ function urlFor(source) {
 export default function Post() {
   const [singlePost, setSinglePost] = useState(null);
   const { slug } = useParams();
+  const [postComments, setPostComments] = useState([]);
 
   useEffect(() => {
     sanityClient
@@ -44,21 +47,30 @@ export default function Post() {
       'authorBio': author->bio,
       'categories': categories[]->title,
       'counter': counter,
-      'comments':*[_type == "comment" && post._ref == ^._id ]|order(publishedAt desc){
-         _id,
-         name,
-         email,
-         comment,
-    _createdAt}
 }`
       )
       .then((data) => setSinglePost(data[0]))
       .catch(console.error);
   }, [slug]);
 
-  console.log(singlePost);
+  useEffect(() => {
+    db.collection('comments')
+      .doc(singlePost?._id)
+      .collection('comment')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) =>
+        setPostComments(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+  }, [singlePost?._id]);
 
-  if (!singlePost) return <div>Loading...</div>;
+  console.log(singlePost?._id, postComments);
+
+  if (!singlePost) return <div className="loader">Loading...</div>;
 
   if (typeof window !== 'undefined') {
     //scroll-progress
@@ -95,6 +107,18 @@ export default function Post() {
 
   return (
     <div className="singlePost">
+      <Helmet>
+        {' '}
+        <meta charSet="utf-8" />
+        <title>{singlePost.title}</title>
+        <meta name="description" content="Blog about webdevelopment" />
+        <meta
+          name="keywords"
+          content="web, development, api, react, angular, frontend, backend, fullstack"
+        />
+        <meta name="author" content="Kacper Hernacki" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Helmet>
       <Toolbar /> <div id="myBar" className="singlePost__progress"></div>
       <div className="singlePost__container">
         <h1 className="singlePost__title">{singlePost.title}</h1>
@@ -138,8 +162,18 @@ export default function Post() {
           author={singlePost.author}
           authorBio={singlePost.authorBio}
         />
-        {/* <Comments comments={singlePost?.comments} />
-        <CommentsForm _id={singlePost._id} /> */}
+        <h5>Comments:</h5>
+        {postComments?.map(({ id, data }) => (
+          <Comments
+            key={id}
+            id={id}
+            name={data.name}
+            email={data.email}
+            comment={data.comment}
+            timestamp={data.timestamp}
+          />
+        ))}
+        <CommentsForm _id={singlePost?._id} />
       </div>{' '}
       <Footer />
     </div>

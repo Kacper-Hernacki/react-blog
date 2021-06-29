@@ -1,22 +1,19 @@
 import React from 'react';
 import './Comments.css';
 
-function Comments({ comments = [] }) {
+function Comments({ key, id, name, email, comment, timestamp }) {
   return (
     <div className="comments">
-      <h5>Comments:</h5>
       <div className="comments__container">
-        {comments?.map(({ _id, _createdAt, name, email, comment }) => (
-          <p className="comments__comment" key={_id}>
-            <h4>
-              <span>{name}</span> says:
-            </h4>
-            <p className="comments__date">
-              {new Date(_createdAt).toDateString()}
-            </p>
-            <p>{comment}</p>
+        <p className="comments__comment">
+          <h4>
+            <span>{name}</span> says:
+          </h4>
+          <p className="comments__date">
+            {new Date(timestamp?.toDate()).toLocaleString()}
           </p>
-        ))}
+          <p>{comment}</p>
+        </p>
       </div>
     </div>
   );

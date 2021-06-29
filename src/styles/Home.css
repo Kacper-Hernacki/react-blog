@@ -12,6 +12,7 @@
   background-color: #eef0f1;
   color: #2f3640;
   height: 100%;
+  overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
   transition: ease-in-out 1000ms;

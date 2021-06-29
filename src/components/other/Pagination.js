@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import './Pagination.css';
@@ -9,6 +9,7 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
+
   return (
     <div className="pagination">
       {' '}

@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 import './CommentsForm.css';
 import Button from '@material-ui/core/Button';
-import { useForm } from 'react-hook-form';
+import db from '../../firebase';
+import firebase from 'firebase';
 
 function CommentsForm({ _id }) {
-  const [formData, setFormData] = useState();
-
   // Sets up our form states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [comment, setComment] = useState('');
 
-  const onSubmit = async (data) => {
+  const handleSubmit = (e) => {
     setIsSubmitting(true);
 
-    setFormData(data);
-    console.log(formData);
+    db.collection('comments').doc(`${_id}`).collection('comment').add({
+      name: name,
+      email: email,
+      comment: comment,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    setIsSubmitting(false);
+    setHasSubmitted(true);
   };
 
   if (isSubmitting) {
@@ -33,23 +35,21 @@ function CommentsForm({ _id }) {
     // Returns the data that the user submitted for them to preview after submission
     return (
       <div className="support">
-        <h3 className="support__header">
-          Thanks for your comment! It has to be authorized by an administrator
-        </h3>
+        <h3 className="support__header">Thanks for your comment!</h3>
         <ul>
           <p className="support__dataContainer">
             <p className="support__data">
               {' '}
-              <span>Name:</span> {formData.name}
+              <span>Name:</span> {name}
             </p>
 
             <p className="support__data">
               {' '}
-              <span>Email:</span> {formData.email}
+              <span>Email:</span> {email}
             </p>
             <p className="support__data">
               {' '}
-              <span>Comment:</span> {formData.comment}
+              <span>Comment:</span> {comment}
             </p>
           </p>
         </ul>
@@ -58,32 +58,33 @@ function CommentsForm({ _id }) {
   }
 
   return (
-    <form className="commentsForm" onSubmit={handleSubmit(onSubmit)} disabled>
+    <form className="commentsForm" onSubmit={handleSubmit} disabled>
       {' '}
       <h5>Share a comment</h5>
-      <input {...register('_id')} type="hidden" name="_id" value={_id} />
       {/* register your input into the hook by invoking the "register" function */}
       <input
+        onChange={(e) => setName(e.target.value)}
         placeholder="name"
+        value={name}
         className="input"
-        name="name"
-        {...register('name', { required: true })}
+        required
       />
       {/* include validation with required or other standard HTML validation rules */}
       <input
-        placeholder="e-mail"
-        className="input"
-        name="email"
+        onChange={(e) => setEmail(e.target.value)}
         type="email"
-        {...register('email', { required: true })}
+        placeholder="e-mail"
+        value={email}
+        className="input"
+        required
       />
       <textarea
-        {...register('comment', { required: true })}
-        name="comment"
+        onChange={(e) => setComment(e.target.value)}
         rows="8"
-        placeholder="Share your comment"></textarea>
+        placeholder="Share your comment"
+        value={comment}
+        required></textarea>
       {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
       <Button variant="contained" className="shareButton" type="submit">
         {' '}
         Submit
